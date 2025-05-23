@@ -59,9 +59,12 @@ Let's start - 单击右下角的向右或者键盘的右方向键
 					<h1>什么是git</h1>
 				</section>
 				<section data-markdown>
+					<textarea data-templete>
 Git是目前世界上**最先进**的分布式版本控制系统！
+					</textarea>
 				</section>
 				<section data-markdown>
+					<textarea data-templete>
 #### 什么是版本控制系统
 
 - 一个项目，不可能一次完工，需要**反复修改**内容等等，而且有很多文件。
@@ -69,20 +72,151 @@ Git是目前世界上**最先进**的分布式版本控制系统！
 - 版本控制系统可以帮你记录每次修改的内容，这样就可以轻松**回到某个版本**。并查看自己的修改记录。
 
 - 版本控制系统也支持**多人协作**，记录每个人的修改内容，这样项目开发就更加**条理清晰**
+					</textarea>
 				</section>
 				<section data-markdown>
+					<textarea data-templete>
 #### Git就是一个版本控制系统
 
 - 本次例会的主要内容就是要带大家学会Git的基本操作和协作方式，借助**github**这个平台进行项目管理和多人协作
-	
+
 - 帮助大家摆脱掉用QQ互传代码文件的原始时期~
+</textarea>
 				</section>
 				<section data-markdown>
+					<textarea data-templete>
 ## 欢迎关注我们的github组织!
 
 [https://github.com/TIC-DLUT](https://github.com/TIC-DLUT)
+					</textarea>
 				</section>
 			</section>
+			<section>
+				<h1>安装Git</h1>
+				<br />
+				前往：<a href="https://git-scm.com/">https://git-scm.com/</a> 安装即可
+			</section>
+			<section>
+				<section>
+					<h1>初始化Git仓库</h1>
+				</section>
+				<section data-markdown>
+					<textarea data-templete>
+- Git仓库：一个Git仓库其实就是一个目录，目录里的**所有文件**都可以被Git管理
+
+- 所以，我们想创建一个空的git仓库，首先需要创建一个空目录
+
+- **注意！！**如果你使用Windows系统，为了避免遇到各种莫名其妙的问题，请确保目录名（包括父目录）不包含中文。 
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-templete>
+## 在空目录下打开命令行
+
+## 通过`git init`命令把这个目录变成Git可以管理的目录
+
+``` bash [1]
+git init
+```
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-templete>
+- 瞬间Git便把仓库建好了，此时：目录下多了一个.git目录
+
+- .git目录用于让git跟踪管理版本库
+
+- 如果你没有看到.git目录，那是因为这个目录默认是**隐藏**的
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-templete>
+## 为仓库添加文件
+
+- 并**不是**在文件夹中放入文件就会被放入仓库
+
+- 我们需要通过`git add`命令把文件**添加**到仓库中
+
+- 比如，让我们新建一个test.txt文件，用`git add test.txt`命令把该文件添加到我们的仓库中
+
+- 如果想一次性把**所有**文件都加入到仓库中，可以使用`git add -A`命令
+					</textarea>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h1>提交修改</h1>
+				</section>
+				<section data-markdown>
+					<textarea data-templete>
+- Git会帮我们记住修改记录，但是，每次完成一次修改我们需要进行一次**提交**
+
+- 你可以把提交理解为一次保存（对仓库中的**所有**文件进行保存）
+
+- 后面我们会介绍如何回到之前任意一次提交
+
+- 为了记录修改的内容，我们在**每次**提交需要加上**提交信息**，用于记录**本次**提交完成了哪些工作
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-templete>
+## 浅谈提交信息
+
+- 提交信息一定要**有意义**，**简洁**记录本次修改的内容
+
+- 提交信息最好有**统一格式**，比如操作:修改内容，例如：feat:增加功能，fix:修复xxBug，等等
+
+- vscode中可以通过`git-commit-plugin`插件来生成每次commit的内容
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-templete>
+![](image/commit.png)
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-templete>
+## 提交命令
+
+- `git commit -m "提交信息"`
+
+- 不要堆积很多修改后再commit，尽量每一部分修改后进行一次commit，方便进行回溯等等操作
+					</textarea>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h1>时光机穿梭</h1>
+				</section>
+				<section data-markdown>
+					<textarea data-templete>
+## 查看当前仓库状态
+
+- 你可以通过`git status`查看当前仓库状态
+
+- 比如，你可以新建个文件，修改点内容后用`git status`看看现在是什么状态
+
+- **注意**，想要git管理文件，将文件添加到仓库中的操作是必须的
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-templete>
+## 查看提交记录
+
+- 现在让我们多commit几次
+
+- 然后，通过`git log`命令查看提交记录
+
+- 可以看到，从**最近**到**最远**的提交日志出现了
+
+- 我们可以加上`--pretty=oneline`参数来简化日志，即：`git log --pretty=oneline`
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-templete>
+## 版本回退
+					</textarea>
+				</section>
 			</section>
 		</div>
 	</div>
