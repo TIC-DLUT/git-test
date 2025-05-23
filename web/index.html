@@ -215,6 +215,28 @@ git init
 				<section data-markdown>
 					<textarea data-templete>
 ## 版本回退
+
+- 当**当前代码**出现问题时，我们可以通过`git reset`命令**回退**到以前的提交
+
+- 刚刚我们通过`git log`可以看到每一次的commit ID，我们通过`git reset --hard commitID`可以退到对应的提交
+
+- `--hard`会回退到上个版本的**已提交**状态，而`--soft`会回退到上个版本的**未提交**状态，`--mixed`会回退到上个版本**未添加**的状态
+
+- 正常来说，使用`--hard`即可
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-templete>
+> 值得一提的是：commitID可以用HEAD表示，在Git中，用HEAD表示当前版本，也就是最新的提交，上一个版本就是HEAD^，上上一个版本就是HEAD^^，当然往上100个版本写100个^比较容易数不过来，所以写成HEAD~100
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-templete>
+## 撤销修改
+
+- 当你未进行一次commit时，你可能对一个文件的修改不满意，这个时候无需commit后进行`git reset`
+
+- 只需要`git checkout -- 文件名`**撤销**对应文件的修改
 					</textarea>
 				</section>
 			</section>
