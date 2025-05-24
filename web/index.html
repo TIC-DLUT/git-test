@@ -240,6 +240,214 @@ git init
 					</textarea>
 				</section>
 			</section>
+			<section>
+				<section>
+					<h1>远程仓库</h1>
+				</section>
+				<section data-markdown>
+					<textarea data-templete>
+## 将代码同步到github
+
+0. github是全世界最大的git代码托管平台，让我们在github上创建一个仓库
+
+1. 把github仓库源添加到本地仓库中
+
+2. 把本地仓库同步到在线仓库
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-templete>
+### 把github仓库源添加到本地仓库中
+
+1. 在github打开**空仓库**时可以看到**https链接**或者**ssh链接**，形如：`https://github.com/dingdinglz/learngit.git`，或者点击绿色的Code下拉按钮可以看到
+
+2. 为本地仓库添加远程源：`git remote origin [https链接]`
+
+3. origin是远程仓库的默认name，用其他名字替代也可
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-templete>
+## 把本地仓库同步到在线仓库
+
+- `git push -u origin main`，这句的意思是将main分支推送到远程仓库，我们稍后会介绍分支，main分支通常是一个仓库的**默认分支**，也是主分支
+
+- `-u`参数会把本地的main分支与远程的main分支**关联**起来，这样我们在本地进行修改commit后，只需要通过`git push`就可以推送代码，不需要指定目标和分支
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-templete>
+## 克隆远程仓库
+
+- 从github克隆一个仓库，自己或者别人的都可以，`git clone 远程链接`，同样的，https与ssh都可以，例如：`git clone https://github.com/dingdinglz/vivo.git`
+
+- 当远程仓库**更新**时，你可以用`git pull`使自己的本地仓库与远程仓库保持一致，也就是保持最新
+
+- 当你clone一个仓库时，自动**绑定**了远程仓库，有commit后直接`git push`即可推送代码
+					</textarea>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h1>分支管理</h1>
+				</section>
+				<section data-markdown>
+					<textarea data-templete>
+## 为什么需要分支
+
+- 通常来说，我们认为一个**并非积极开发中**的仓库的主分支中的代码是完善的
+
+- 开发中，出现未来得及**测试**或者**未完成**的代码是很正常的
+
+- 因此我们就需要维护一套或**几套**代码，分支就可以完成改功能，通过PR我们可以**合并**分支
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-templete>
+## 创建分支与切换分支
+
+- 我们通过`git branch 分支名`可以**创建**一个分支
+
+- 通过`git checkout 分支名`可以**切换**到一个分支，`git switch 分支名`也可以
+
+- `git checkout -b 分支名`表示创建并切换分支，**等效于**先branch再checkout
+
+- 一个新分支需要用`git push -u origin 分支名`推送并关联
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-templete>
+## 分支合并
+
+- 需要将两个分支进行**合并**时，我们可以切换到需要合并到分支，然后`git merge 需要被合并的分支`
+
+- 有时，我们可能遇到**冲突**，比如两个分支都修改了某个地方，解决冲突后进行`commit`即可
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-templete>
+## pull request
+
+- 你可以通过在github上发送PR（即pull request）的方式，**合并**自己仓库的两个分支
+
+- 你也可以fork别人的仓库（即复制一份别人的仓库），修改后，通过PR请求合并到主仓库，从而达到**多人协作**的目的
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-templete>
+## Stash
+
+- 我们在实际开发中，经常会遇到当前分支没有**修改完毕**，不能提交，但要转头修改另一个分支的情况
+
+- 这个时候，我们可以通过`git stash`**保存**当前工作进度，然后切换到其他分支
+
+- 切换回来后，使用`git stash pop`即可**还原**原工作进度
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-templete>
+## 分支使用技巧
+
+- （积极开发时，使用一个默认的main分支即可）
+
+- main分支用来存放**稳定**的、经过**测试**的代码
+
+- 当需要开发一个新功能时，开一个feature-xxx分支
+
+- 功能开发结束，将feature-xxx分支合并到test分支，并添加对应的测试用例，经过测试后，合并到dev分支
+
+- 过段时间后，稳定无bug，可合并至main分支
+					</textarea>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h1>标签管理</h1>
+				</section>
+				<section data-markdown>
+					<textarea data-templete>
+- 当我们需要发布一个版本时，我们可以打一个标签（tag）（github要求Release必须有tag）
+
+- tag指向一次commit，代表一次阶段性的胜利！
+
+- 打tag的方法也比较简单，只需要提交后用`git tag tagName`即可，tagName可以是版本号，形如v1.1.1
+
+- 注意，对标签**更改**后，下次push需要带上`--tags`
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-templete>
+## Tag常见操作
+
+- 删除tag：`git tag -d tagName`
+
+- 查看tag信息：`git show tagName`
+					</textarea>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h1>Github特性介绍</h1>
+				</section>
+				<section data-markdown>
+					<textarea data-templete>
+## README
+
+- github的每个仓库都可以有一个自述文件，以readme.md为名
+
+- readme.md使用markdown语法，在仓库首页展示
+
+- 一个优秀的仓库需要一个**清晰详细**的readme
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-templete>
+## 发布
+
+- 你可以发布可执行文件等等
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-templete>
+## Github Action
+
+- Github Action是一个仓库的一组**自动化**脚本
+
+- Github Action有一个运行的**时机**，然后执行**特定**的操作
+
+- 你可以用来自动部署、自动生成多平台可执行文件并发布等等
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-templete>
+## Github Pages
+
+- 你部署静态文件
+
+- 支持绑定自定义域名
+
+- 可以结合Github Actions实现自动化部署
+					</textarea>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h1>多人协作</h1>
+				</section>
+				<section data-markdown>
+					<textarea data-templete>
+1. 协商分工、确定每个人负责的功能部分
+
+2. 创建仓库（通常是前端、后端各一个），由每部分负责人创建，或者新建一个组织
+
+3. 指定taskList，即开发计划表，需分清轻重缓急
+
+4. fork对应的仓库，开发
+
+5. PR，技术力高的同学进行`code review`，处理冲突、合并
+					</textarea>
+				</section>
+			</section>
 		</div>
 	</div>
 
